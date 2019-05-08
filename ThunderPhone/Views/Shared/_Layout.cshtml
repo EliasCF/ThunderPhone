@@ -38,14 +38,11 @@
         </div>
     </nav>
     
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2019 - ThunderPhone</p>
-            <partial name="_CookieConsentPartial" />
-        </footer>
-    </div>
+    @RenderBody()
+
+    <footer>
+        <partial name="_CookieConsentPartial" />
+    </footer>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -69,5 +66,6 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
+    @RenderSection("Styles", required: false)
 </body>
 </html>

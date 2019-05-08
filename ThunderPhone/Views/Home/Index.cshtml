@@ -2,8 +2,36 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="container">
-    <div>
-        asd
+@section Styles {
+    <link rel="stylesheet" href="~/css/home-index.css" />
+}
+
+<div class="text-center">
+    <div class="mb-5" style="background-color: #E1DADA;">
+        <div class="layer-container">
+            <img src="~/images/phones.png" width="950" class="img-fluid" alt="phones" style="opacity: 0.6" />
+            <div class="centered">De bedste smartphones, til de bedste priser</div>
+        </div>
+        <a class="indicator ">V</a>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-8">
+                <div style="position: relative">
+                    <div class="color-box" style="position: absolute; z-index: 1; width: 1000px; height: 500px; margin-top: 50px;">
+                    </div>
+                    <img src="~/images/smartphone.png" alt="smartphone" style="position: absolute; z-index: 2; right: 50px; bottom: -570px;"/>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <h1>Smartphones</h1>
+                <article>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </article>
+            </div>
+        </div>
     </div>
 </div>

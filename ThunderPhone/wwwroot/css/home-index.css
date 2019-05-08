@@ -1,0 +1,25 @@
+﻿.layer-container {
+    position: relative;
+    text-align: center;
+}
+
+.centered {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    color: white;
+    font-size: 70px;
+    font-weight: 700;
+}
+
+.indicator {
+    font-size: 80px;
+    color: #707070 !important;
+    cursor: pointer;
+}
+
+.color-box {
+    background-color: #E1DADA;
+}
