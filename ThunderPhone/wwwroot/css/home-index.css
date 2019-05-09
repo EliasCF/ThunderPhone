@@ -20,6 +20,53 @@
     cursor: pointer;
 }
 
+.indicator:hover {
+    text-decoration: none;
+}
+
 .color-box {
     background-color: #E1DADA;
+}
+
+.category-title {
+    position: relative;
+    z-index: 1;
+    
+    font-size: 65px;
+}
+
+.category-title::before {
+    border-top: 34px solid #FF7E7E;
+    content: "";
+    margin: 0 auto;
+    position: absolute;
+    top: 60%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: -1;
+}
+
+.frontpage-content {
+    background: linear-gradient(#aaa, #aaa) no-repeat center/3px 100%;
+}
+
+.frontpage-footer {
+    background-color: #E1DADA;
+    height: 200px;
+
+    margin-top: 500px;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.flex-container > div {
+    width: 200px;
+    height: 100px;
+    margin: 10px;
+    text-align: center;
 }

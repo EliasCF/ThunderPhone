@@ -6,31 +6,97 @@
     <link rel="stylesheet" href="~/css/home-index.css" />
 }
 
-<div class="text-center">
-    <div class="mb-5" style="background-color: #E1DADA;">
+<div class="text-center frontpage-content">
+    <div style="background-color: #E1DADA;">
         <div class="layer-container">
             <img src="~/images/phones.png" width="950" class="img-fluid" alt="phones" style="opacity: 0.6" />
             <div class="centered">De bedste smartphones, til de bedste priser</div>
         </div>
-        <a class="indicator ">V</a>
+        <a class="indicator" href="#stuff">V</a>
     </div>
     <div class="container-fluid">
-        <div class="row">
+
+        <!--Smartphones-->
+        <div class="row mt-5">
             <div class="col-sm-8">
                 <div style="position: relative">
                     <div class="color-box" style="position: absolute; z-index: 1; width: 1000px; height: 500px; margin-top: 50px;">
                     </div>
-                    <img src="~/images/smartphone.png" alt="smartphone" style="position: absolute; z-index: 2; right: 50px; bottom: -570px;"/>
+                    <a href="#stuff">
+                        <img src="~/images/smartphone.png" alt="smartphone" style="position: absolute; z-index: 2; right: 50px; bottom: -570px;" />
+                    </a>
                 </div>
             </div>
             <div class="col-sm-4">
-                <h1>Smartphones</h1>
-                <article>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </article>
+                <div style="padding-top: 50px;" id="stuff">
+                    <h1 class="category-title">Smartphones</h1>
+                    <article>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </article>
+                </div>
+            </div>
+        </div>
+
+        <!--Covers-->
+        <div class="row" style="margin-top: 400px;">
+            <div class="col-sm-4">
+                <div style="padding-top: 50px;">
+                    <h1 class="category-title">Covers</h1>
+                    <article>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </article>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div style="position: relative">
+                    <div class="color-box" style="position: absolute; z-index: 1; width: 1000px; height: 500px; margin-top: 50px;">
+                    </div>
+                    <a href="#stuff">
+                        <img src="~/images/cover.png" height="900" width="1000" alt="smartphone" style="position: absolute; z-index: 2; right: 50px; bottom: -650px;" />
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!--Chargers-->
+        <div class="row" style="margin-top: 400px;">
+            <div class="col-sm-8">
+                <div style="position: relative">
+                    <div class="color-box" style="position: absolute; z-index: 1; width: 1000px; height: 500px; margin-top: 50px;">
+                    </div>
+                    <a href="#stuff">
+                        <img src="~/images/charger.png" height="500" width="700" alt="smartphone" style="position: absolute; z-index: 2; right: 150px; bottom: -500px;" />
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div style="padding-top: 50px;">
+                    <h1 class="category-title">Opladere</h1>
+                    <article>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </article>
+                </div>
+            </div>
+        </div>
+        <div class="frontpage-footer">
+            <div class="flex-container">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div>
+                    <h3>Kontakt:</h3>
+                    <p>support@tphone.dk</p>
+                    <p>+45 33 44 55 66</p>
+                </div>
             </div>
         </div>
     </div>
