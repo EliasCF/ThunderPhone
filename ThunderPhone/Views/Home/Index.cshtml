@@ -6,6 +6,16 @@
     <link rel="stylesheet" href="~/css/home-index.css" />
 }
 
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
+
+    <script>
+        $('.hover-tilt').tilt({
+            scale: 1.1
+        })
+    </script>
+}
+
 <div class="text-center frontpage-content">
     <div style="background-color: #E1DADA;">
         <div class="layer-container">
@@ -23,12 +33,15 @@
                     <div class="color-box" style="position: absolute; z-index: 1; width: 1000px; height: 500px; margin-top: 50px;">
                     </div>
                     <a href="/Shop/index?category=smartphone">
-                        <img src="~/images/smartphone.png" alt="smartphone" style="position: absolute; z-index: 2; right: 50px; bottom: -570px;" />
+                        <img src="~/images/smartphone.png" 
+                             class="hover-tilt" 
+                             alt="smartphone" 
+                             style="position: absolute; z-index: 2; right: 400px; bottom: -520px;" />
                     </a>
                 </div>
             </div>
             <div class="col-sm-4">
-                <div style="padding-top: 50px;" id="stuff">
+                <div style="padding-top: 5px;" id="stuff">
                     <h1 class="category-title">Smartphones</h1>
                     <article>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -43,7 +56,7 @@
         <!--Covers-->
         <div class="row" style="margin-top: 300px;">
             <div class="col-sm-4">
-                <div style="padding-top: 50px;">
+                <div style="padding-top: 5px;">
                     <h1 class="category-title">Covers</h1>
                     <article>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -58,7 +71,12 @@
                     <div class="color-box" style="position: absolute; z-index: 1; width: 1000px; height: 500px; margin-top: 50px;">
                     </div>
                     <a href="/Shop/index?category=cover">
-                        <img src="~/images/cover.png" height="900" width="1000" alt="smartphone" style="position: absolute; z-index: 2; right: 50px; bottom: -650px;" />
+                        <img src="~/images/cover.png" 
+                             class="hover-tilt" 
+                             alt="smartphone" 
+                             style="position: absolute; z-index: 2; right: 230px; bottom: -500px;"
+                             width="603"
+                             height="514" />
                     </a>
                 </div>
             </div>
@@ -71,12 +89,16 @@
                     <div class="color-box" style="position: absolute; z-index: 1; width: 1000px; height: 500px; margin-top: 50px;">
                     </div>
                     <a href="/Shop/index?category=charger">
-                        <img src="~/images/charger.png" height="500" width="700" alt="smartphone" style="position: absolute; z-index: 2; right: 150px; bottom: -500px;" />
+                        <img src="~/images/charger.png" 
+                             class="hover-tilt" alt="smartphone" 
+                             style="position: absolute; z-index: 2; right: 150px; bottom: -500px;" 
+                             width="700"
+                             height="511" />
                     </a>
                 </div>
             </div>
             <div class="col-sm-4">
-                <div style="padding-top: 50px;">
+                <div style="padding-top: 5px;">
                     <h1 class="category-title">Opladere</h1>
                     <article>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
