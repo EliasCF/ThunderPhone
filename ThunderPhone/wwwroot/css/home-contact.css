@@ -1,0 +1,39 @@
+﻿.page-title {
+    position: relative;
+    z-index: 1;
+    
+    font-size: 80px;
+}
+
+.page-title::before {
+    border-top: 34px solid #FF7E7E;
+    content: "";
+    margin: 0 auto;
+    position: absolute;
+    top: 60%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 280px;
+    z-index: -1;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-around;
+
+    margin-top: 100px;
+}
+
+.flex-container > div {
+    background-color: #E1DADA;
+    width: 500px;
+    height: 200px;
+    margin: 10px;
+    text-align: center;
+}
+
+.sub-text {
+    color: grey;
+    font-size: 20px;
+}
