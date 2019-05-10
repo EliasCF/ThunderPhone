@@ -1,0 +1,13 @@
+﻿h1 {
+    color: grey;
+
+    font-weight: bold;
+    font-size: 50px;
+}
+
+span {
+    color: lightgray;
+
+    font-weight: bold;
+    font-size: 25px;
+}

@@ -1,7 +1,19 @@
 ﻿@{
     ViewData["Title"] = "About";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
 
-<p>Use this area to provide additional information.</p>
+@section Styles {
+    <link rel="stylesheet" href="~/css/home-about.css" />
+}
+
+<div class="container-fluid text-center">
+    <div class="h-100 d-flex justify-content-center">
+        <div class="jumbotron my-auto" style="background-color: white;">
+            <h1>Om ThunderPhone</h1>
+            <span>
+                ThunderPhone er en webshop der
+                sælger sartphones og tilbehør
+            </span>  
+        </div>
+    </div>
+</div>
