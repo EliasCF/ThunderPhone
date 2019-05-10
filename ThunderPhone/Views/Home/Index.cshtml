@@ -13,6 +13,22 @@
         $('.hover-tilt').tilt({
             scale: 1.1
         })
+
+        //Smoth scrolling
+        $('.indicator').on('click', function (event) {
+            if (this.hash !== "") {
+              event.preventDefault();
+
+              var hash = this.hash;
+
+              $('html, body').animate({
+                scrollTop: $(hash).offset().top
+              }, 700, function(){
+   
+                window.location.hash = hash;
+              });
+            } 
+        });
     </script>
 }
 
@@ -27,7 +43,7 @@
     <div class="container-fluid">
 
         <!--Smartphones-->
-        <div class="row mt-5">
+        <div class="row" style="padding-top: 100px;" id="stuff">
             <div class="col-sm-8">
                 <div style="position: relative">
                     <div class="color-box" style="position: absolute; z-index: 1; width: 1000px; height: 500px; margin-top: 50px;">
@@ -41,7 +57,7 @@
                 </div>
             </div>
             <div class="col-sm-4">
-                <div style="padding-top: 5px;" id="stuff">
+                <div style="padding-top: 5px;">
                     <h1 class="category-title">Smartphones</h1>
                     <article>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
