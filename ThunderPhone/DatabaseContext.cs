@@ -13,11 +13,11 @@ namespace ThunderPhone
         {
         }
 
-        public DbSet<BrandsModel> brands { get; set; }
-        public DbSet<ColorsModel> colors { get; set; }
-        public DbSet<CommentsModel> comments { get; set; }
-        public DbSet<ImagesModel> images { get; set; }
-        public DbSet<ProductsModel> products { get; set; }
+        public DbSet<BrandsModel> Brands { get; set; }
+        public DbSet<ColorsModel> Colors { get; set; }
+        public DbSet<CommentsModel> Comments { get; set; }
+        public DbSet<ImagesModel> Images { get; set; }
+        public DbSet<ProductsModel> Products { get; set; }
 
         protected override void OnModelCreating (ModelBuilder builder)
         {

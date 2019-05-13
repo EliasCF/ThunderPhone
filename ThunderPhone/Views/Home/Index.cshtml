@@ -17,13 +17,13 @@
         //Smoth scrolling
         $('.indicator').on('click', function (event) {
             if (this.hash !== "") {
-              event.preventDefault();
+                event.preventDefault();
 
-              var hash = this.hash;
+                var hash = this.hash;
 
-              $('html, body').animate({
-                scrollTop: $(hash).offset().top
-              }, 700, function(){
+                $('html, body').animate({
+                  scrollTop: $(hash).offset().top
+                }, 700, function(){
    
                 window.location.hash = hash;
               });
