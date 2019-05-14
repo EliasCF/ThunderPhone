@@ -1,29 +1,23 @@
 ﻿var shopApp = new Vue({
     el: '#shopApp',
     data: {
-        products: []
+        products: [],
+        categories: [],
+        colors: []
     },
     created: function () {
+        //Get products and arrange them in arrays containing three products each
         $.get('/api/products/', (response) => {
-            /*
-            for (let i = 0; i < response.length; i++) {
-                $.get('/api/images/' + response[i].id, (image) => {
-                    //response[i].imagePath = image[0].imagePath;
-
-                    Object.assign(response[i], { imagePath: image[0].imagePath });
-                });
-            }
-            */
-
-            var data = [];
+            var sliceList = [];
 
             //Arrange array into arrays with 3 objects in each
             for (let i = 0; i < response.length; i += 3) {
-                data.push(response.slice(i, i + 3));
+                sliceList.push(response.slice(i, i + 3));
             }
 
-            this.products = data;
+            this.products = sliceList;
         });
+
     },
     methods: {
         getImagePath: function (id) {
