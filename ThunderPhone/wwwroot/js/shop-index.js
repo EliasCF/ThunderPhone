@@ -3,7 +3,13 @@
     data: {
         products: [],
         categories: [],
-        colors: []
+        colors: [],
+        brands: [],
+        selected: {
+            category: 'Alle',
+            color: 'Alle',
+            brand: 'Alle'
+        }
     },
     created: function () {
         //Get products and arrange them in arrays containing three products each
@@ -18,6 +24,20 @@
             this.products = sliceList;
         });
 
+        //Get categories
+        $.get('/api/categories', (response) => {
+            this.categories = response;
+        });
+
+        //Get colors
+        $.get('/api/colors', (response) => {
+            this.colors = response;
+        });
+
+        //Get brands
+        $.get('/api/brands', (response) => {
+            this.brands = response;
+        });
     },
     methods: {
         getImagePath: function (id) {

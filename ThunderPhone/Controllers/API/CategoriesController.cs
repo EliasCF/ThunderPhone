@@ -8,18 +8,18 @@ using ThunderPhone.Models;
 
 namespace ThunderPhone.Controllers.API
 {
-    [Route("api/brands")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class BrandsController : ControllerBase
+    public class CategoriesController : ControllerBase
     {
         public DatabaseContext db { get; set; }
 
-        public BrandsController(DatabaseContext context)
+        public CategoriesController(DatabaseContext context)
         {
             db = context;
         }
 
         [HttpGet]
-        public List<BrandsModel> GetBrands() => db.Brands.ToList();
+        public List<CategoriesModel> GetCategories() => db.Categories.ToList();
     }
 }

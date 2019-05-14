@@ -7,7 +7,40 @@
     <script src="~/js/shop-index.js"></script>
 }
 
+@section Styles {
+    <link rel="stylesheet" href="~/css/shop-index.css" />
+}
+
 <div class="container-fluid text-center" id="shopApp">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-lg-4">
+                    <span class="text-secondary">Kategorier:</span>
+                    <select v-model="selected.category" class="select-box">
+                        <option value="Alle">Alle</option>
+                        <option v-for="category in categories" :value="category.category">{{category.category}}</option>
+                    </select>
+                </div>
+                <div class="col-lg-4">
+                    <span class="text-secondary">Brands:</span>
+                    <select v-model="selected.brand" class="select-box">
+                        <option value="Alle">Alle</option>
+                        <option v-for="brand in brands" :value="brand.brand">{{brand.brand}}</option>
+                    </select>
+                </div>
+                <div class="col-lg-4">
+                    <span class="text-secondary">Farver:</span>
+                    <select v-model="selected.color" class="select-box">
+                        <option value="Alle">Alle</option>
+                        <option v-for="color in colors" :value="color.color">{{color.color}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6"></div>
+    </div>
+    <hr />
     <div class="row" v-for="productRange in products" :key="productRange.id">
         <div class="col-sm-4" v-for="product in productRange" :key="product.id">
             <img :src="getImagePath(product.id)" alt="product" width="500" height="500" />

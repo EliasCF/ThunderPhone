@@ -1,0 +1,20 @@
+﻿.select-box {
+    border: none;
+    background-color: white;
+    color: grey;
+}
+
+.select-box:focus {
+    outline: none;
+}
+
+.select-box option:focus {
+    background-color: aliceblue;
+}
+
+.select-box {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}

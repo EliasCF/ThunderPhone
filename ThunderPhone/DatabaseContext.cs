@@ -19,6 +19,8 @@ namespace ThunderPhone
         public DbSet<ImagesModel> Images { get; set; }
         public DbSet<ProductsModel> Products { get; set; }
 
+        public DbSet<CategoriesModel> Categories { get; set; }
+
         protected override void OnModelCreating (ModelBuilder builder)
         {
             builder.Entity<BrandsModel>().HasKey(m => m.Id);
@@ -26,6 +28,7 @@ namespace ThunderPhone
             builder.Entity<CommentsModel>().HasKey(m => m.Id);
             builder.Entity<ImagesModel>().HasKey(m => m.Id);
             builder.Entity<ProductsModel>().HasKey(m => m.Id);
+            builder.Entity<CategoriesModel>().HasKey(m => m.Id);
         }
 
         public override int SaveChanges()

@@ -29,6 +29,11 @@ namespace ThunderPhone.Models
         [ForeignKey("BrandId")]
         public BrandsModel Brand { get; set; }
 
+        [Required]
+        public int CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
+        public CategoriesModel Category { get; set; }
+
         [MaxLength(500)]
         public string Description { get; set; }
 

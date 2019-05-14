@@ -16,6 +16,7 @@ namespace ThunderPhone.Controllers.API
             db = context;
         }
 
+        [HttpGet]
         public List<ColorsModel> GetBrands() => db.Colors.ToList();
     }
 }
