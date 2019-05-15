@@ -12,28 +12,29 @@
 }
 
 <div class="container-fluid text-center" id="shopApp">
+    <!--Filter-->
     <div class="row">
         <div class="col-sm-6">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-4 mb-3">
                     <span class="text-secondary">Kategorier:</span>
                     <select v-model="selected.category" class="select-box">
                         <option value="Alle">Alle</option>
-                        <option v-for="category in categories" :value="category.category">{{category.category}}</option>
+                        <option v-for="category in categories" :value="category.id">{{category.category}}</option>
                     </select>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-4 mb-3">
                     <span class="text-secondary">Brands:</span>
                     <select v-model="selected.brand" class="select-box">
                         <option value="Alle">Alle</option>
-                        <option v-for="brand in brands" :value="brand.brand">{{brand.brand}}</option>
+                        <option v-for="brand in brands" :value="brand.id">{{brand.brand}}</option>
                     </select>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-4 mb-3">
                     <span class="text-secondary">Farver:</span>
                     <select v-model="selected.color" class="select-box">
                         <option value="Alle">Alle</option>
-                        <option v-for="color in colors" :value="color.color">{{color.color}}</option>
+                        <option v-for="color in colors" :value="color.id">{{color.color}}</option>
                     </select>
                 </div>
             </div>
@@ -41,12 +42,13 @@
         <div class="col-sm-6"></div>
     </div>
     <hr />
+    <!--Item list-->
     <div class="row" v-for="productRange in products" :key="productRange.id">
-        <div class="col-sm-4" v-for="product in productRange" :key="product.id">
-            <img :src="getImagePath(product.id)" alt="product" width="500" height="500" />
+        <div class="col-xl-4" v-for="product in productRange" :key="product.id">
+            <img :src="getImagePath(product.id)" class="img-fluid" alt="product" width="500" height="500" />
             <div class="row">
-                <div class="col-sm-6">{{product.name}}</div>
-                <div class="col-sm-6">{{product.price}} kr,-</div>
+                <div class="col-xl-6" style="word-break: break-word">{{product.name}}</div>
+                <div class="col-xl-6">{{product.price}} kr,-</div>
             </div>
         </div>
     </div>

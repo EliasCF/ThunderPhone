@@ -8,10 +8,7 @@
     outline: none;
 }
 
-.select-box option:focus {
-    background-color: aliceblue;
-}
-
+/*Remove arrow from select element*/
 .select-box {
     -webkit-appearance: none;
     -moz-appearance: none;

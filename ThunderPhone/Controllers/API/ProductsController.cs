@@ -18,9 +18,21 @@ namespace ThunderPhone.Controllers.API
         }
 
         [HttpGet]
-        public List<ProductsModel> GetProducts () => 
-            db.Products
-                .ToList();
+        public List<ProductsModel> GetProducts (string categories, string brands, string colors)
+        {
+            var query = db.Products.AsQueryable();
+
+            if (categories != null)
+                query = query.Where(p => p.CategoryId == int.Parse(categories));
+
+            if (brands != null)
+                query = query.Where(p => p.BrandId == int.Parse(brands));
+
+            if (colors != null)
+                query = query.Where(p => p.ColorId == int.Parse(colors));
+
+            return query.ToList();
+        }
 
         [HttpGet("{prudctId}")]
         public ProductsModel GetProduct (string ProductId) => 

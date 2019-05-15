@@ -14,14 +14,7 @@
     created: function () {
         //Get products and arrange them in arrays containing three products each
         $.get('/api/products/', (response) => {
-            var sliceList = [];
-
-            //Arrange array into arrays with 3 objects in each
-            for (let i = 0; i < response.length; i += 3) {
-                sliceList.push(response.slice(i, i + 3));
-            }
-
-            this.products = sliceList;
+            this.products = this.sliceProducts(response);
         });
 
         //Get categories
@@ -40,6 +33,18 @@
         });
     },
     methods: {
+        sliceProducts: function (products) {
+            var sliceList = [];
+
+            //Arrange array into arrays with 3 objects in each
+            for (let i = 0; i < products.length; i += 3) {
+                sliceList.push(products.slice(i, i + 3));
+            }
+
+            console.log(sliceList);
+
+            return sliceList;
+        },
         getImagePath: function (id) {
             result = null;
 
@@ -53,6 +58,47 @@
             });
 
             return result;
+        }
+    },
+    watch: {
+        'selected.category': function (newSelected) {
+            console.log(newSelected);
+
+            let queryString = '?categories=' + this.selected.category;
+
+            if (newSelected === 'Alle') {
+                queryString = '';
+            }
+
+            $.get('/api/products' + queryString, (response) => {
+                this.products = this.sliceProducts(response);
+            });
+        },
+        'selected.brand': function (newSelected) {
+            console.log(newSelected);
+
+            let queryString = '?brands=' + this.selected.brand;
+
+            if (newSelected === 'Alle') {
+                queryString = '';
+            }
+
+            $.get('/api/products' + queryString, (response) => {
+                this.products = this.sliceProducts(response);
+            });
+        },
+        'selected.color': function (newSelected) {
+            console.log(newSelected);
+
+            let queryString = '?colors=' + this.selected.color;
+
+            if (newSelected === 'Alle') {
+                queryString = '';
+            }
+
+            $.get('/api/products' + queryString, (response) => {
+                this.products = this.sliceProducts(response);
+            });
         }
     }
 });
