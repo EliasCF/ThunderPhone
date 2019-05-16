@@ -12,10 +12,38 @@
         }
     },
     created: function () {
-        //Get products and arrange them in arrays containing three products each
-        $.get('/api/products/', (response) => {
-            this.products = this.sliceProducts(response);
+        var getProducts = (productId) => {
+            let queryString = '?categories=' + productId;
+
+            if (productId === null) {
+                queryString = '';
+            }
+
+            //Get products and arrange them in arrays containing three products each
+            $.get('/api/products' + queryString, (response) => {
+                this.products = this.sliceProducts(response);
+            });
+        };
+
+        //If a category has been provided in the query string, this promise will get the id of the category
+        //before allowing the getProducts function to fetch products
+        var getProductId = new Promise((resolve) => {
+            var urlParams = new URLSearchParams(window.location.search);
+
+            if (urlParams.get('category') !== null) {
+                //Get Id of category
+                $.get('/api/categories/id/' + urlParams.get('category'), (response) => {
+                    resolve(response);
+                });
+            } else {
+                resolve(null);
+            }
         });
+
+        getProductId.then((value) => {
+            getProducts(value);
+        });
+
 
         //Get categories
         $.get('/api/categories', (response) => {
@@ -41,8 +69,6 @@
                 sliceList.push(products.slice(i, i + 3));
             }
 
-            console.log(sliceList);
-
             return sliceList;
         },
         getImagePath: function (id) {
@@ -58,45 +84,46 @@
             });
 
             return result;
+        },
+        getProductsQueryString: function () {
+            let queryString = '';
+
+            if (this.selected.category !== 'Alle') {
+                queryString += '?categories=' + this.selected.category;
+            }
+
+            if (this.selected.brand !== 'Alle') {
+                if (queryString === '') {
+                    queryString += '?brands=' + this.selected.brand;
+                } else {
+                    queryString += '&brands=' + this.selected.brand;
+                }
+            }
+
+            if (this.selected.color !== 'Alle') {
+                if (queryString === '') {
+                    queryString += '?colors=' + this.selected.color;
+                } else {
+                    queryString += '&colors=' + this.selected.color;
+                }
+            }
+
+            return queryString;
         }
     },
     watch: {
-        'selected.category': function (newSelected) {
-            console.log(newSelected);
-
-            let queryString = '?categories=' + this.selected.category;
-
-            if (newSelected === 'Alle') {
-                queryString = '';
-            }
-
-            $.get('/api/products' + queryString, (response) => {
+        'selected.category': function () {
+            $.get('/api/products' + this.getProductsQueryString(), (response) => {
                 this.products = this.sliceProducts(response);
             });
         },
-        'selected.brand': function (newSelected) {
-            console.log(newSelected);
-
-            let queryString = '?brands=' + this.selected.brand;
-
-            if (newSelected === 'Alle') {
-                queryString = '';
-            }
-
-            $.get('/api/products' + queryString, (response) => {
+        'selected.brand': function () {
+            $.get('/api/products' + this.getProductsQueryString(), (response) => {
                 this.products = this.sliceProducts(response);
             });
         },
-        'selected.color': function (newSelected) {
-            console.log(newSelected);
-
-            let queryString = '?colors=' + this.selected.color;
-
-            if (newSelected === 'Alle') {
-                queryString = '';
-            }
-
-            $.get('/api/products' + queryString, (response) => {
+        'selected.color': function () {
+            $.get('/api/products' + this.getProductsQueryString(), (response) => {
                 this.products = this.sliceProducts(response);
             });
         }

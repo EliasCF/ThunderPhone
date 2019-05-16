@@ -15,3 +15,9 @@
     text-indent: 1px;
     text-overflow: '';
 }
+
+.shop-item {
+    border-color: #E2E2E2;
+    border-width: 1px;
+    border-style: solid;
+}

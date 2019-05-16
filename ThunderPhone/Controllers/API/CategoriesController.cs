@@ -8,7 +8,7 @@ using ThunderPhone.Models;
 
 namespace ThunderPhone.Controllers.API
 {
-    [Route("api/[controller]")]
+    [Route("api/categories")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {
@@ -20,6 +20,12 @@ namespace ThunderPhone.Controllers.API
         }
 
         [HttpGet]
-        public List<CategoriesModel> GetCategories() => db.Categories.ToList();
+        public List<CategoriesModel> GetCategories () => db.Categories.ToList();
+
+        [HttpGet("id/{name}")]
+        public int GetIdByName(string name) => 
+            db.Categories
+            .First(c => c.Category == name)
+            .Id;
     }
 }
