@@ -13,15 +13,19 @@
     },
     created: function () {
         var getProducts = (productId) => {
-            let queryString = '?categories=' + productId;
+            return new Promise((resolve) => {
+                let queryString = '?categories=' + productId;
 
-            if (productId === null) {
-                queryString = '';
-            }
+                if (productId === null) {
+                    queryString = '';
+                }
 
-            //Get products and arrange them in arrays containing three products each
-            $.get('/api/products' + queryString, (response) => {
-                this.products = this.sliceProducts(response);
+                //Get products and arrange them in arrays containing three products each
+                $.get('/api/products' + queryString, (response) => {
+                    this.products = this.sliceProducts(response);
+
+                    resolve(productId);
+                });
             });
         };
 
@@ -41,13 +45,16 @@
         });
 
         getProductId.then((value) => {
-            getProducts(value);
-        });
+            getProducts(value).then((id) => {
+                //Get categories
+                $.get('/api/categories', (response) => {
+                    this.categories = response;
 
-
-        //Get categories
-        $.get('/api/categories', (response) => {
-            this.categories = response;
+                    if (id !== null) {
+                        this.selected.category = id;
+                    }
+                });
+            });
         });
 
         //Get colors
