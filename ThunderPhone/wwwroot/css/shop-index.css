@@ -21,3 +21,15 @@
     border-width: 1px;
     border-style: solid;
 }
+
+.shop-item > div > a > img {
+    transition: transform 0.8s ease;
+}
+
+.shop-item > div > a > img:hover {
+    transform: scale(1.4);
+}
+
+.img-container {
+    overflow: hidden;
+}

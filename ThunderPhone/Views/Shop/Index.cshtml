@@ -48,7 +48,11 @@
     <div class="row" v-for="productRange in products" :key="productRange.id">
         <div class="col-xl-4" v-for="product in productRange" :key="product.id" style="padding: 10px;">
             <div class="shop-item">
-                <img :src="getImagePath(product.id)" class="img-fluid" alt="product" width="500" height="500" />
+                <div class="img-container">
+                    <a :href="'/shop/item/' + product.productId">
+                        <img :src="getImagePath(product.id)" class="img-fluid" alt="product" width="500" height="500" />
+                    </a>
+                </div>
                 <hr />
                 <div class="row">
                     <div class="col-sm-6" style="word-break: break-word">{{product.name}}</div>
