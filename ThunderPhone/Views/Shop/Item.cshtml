@@ -11,14 +11,30 @@
 @section Scripts {
     <script>
         //Fetch the images of the product
-        $.get('/api/images/' + $('#productId').val(), (response) => {
+        $.get('/api/images/' + $('#Id').val(), (response) => {
             $('#productImage').attr('src', response[0].imagePath)
+        });
+
+        $('#AddToCart').on('click', () => {
+            if (typeof (Storage) !== 'undefined') {
+                let cart = localStorage.getItem('cart');
+
+                if (cart === null) {
+                    localStorage.setItem('cart', [$('#ProductId').val()]);
+                    return;
+                } 
+
+                let cartArray = cart.split(' ');
+                cartArray.push($('#ProductId').val());
+
+                localStorage.setItem('cart', cartArray);
+            }
         });
     </script>
 }
 
-<!--Contains the id of the product-->
-<input type="hidden" id="productId" value="@Model.Id" />
+<input type="hidden" id="Id" value="@Model.Id" />
+<input type="hidden" id="ProductId" value="@Model.ProductId" />
 
 <div class="container-fluid text-center">
     <div class="row">
@@ -32,7 +48,7 @@
                 <article class="item-description mb-5">
                     @Model.Description
                 </article>
-                <button class="form-control">Tilføj til kurv</button>
+                <button class="form-control" id="AddToCart">Tilføj til kurv</button>
             </div>
         </div>
     </div>

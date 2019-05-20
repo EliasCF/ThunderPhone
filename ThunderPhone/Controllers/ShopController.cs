@@ -30,5 +30,11 @@ namespace ThunderPhone.Controllers
 
             return View(product);
         }
+
+        [HttpGet]
+        public IActionResult Cart()
+        {
+            return View();
+        }
     }
 }
