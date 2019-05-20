@@ -9,28 +9,7 @@
 }
 
 @section Scripts {
-    <script>
-        //Fetch the images of the product
-        $.get('/api/images/' + $('#Id').val(), (response) => {
-            $('#productImage').attr('src', response[0].imagePath)
-        });
-
-        $('#AddToCart').on('click', () => {
-            if (typeof (Storage) !== 'undefined') {
-                let cart = localStorage.getItem('cart');
-
-                if (cart === null) {
-                    localStorage.setItem('cart', [$('#ProductId').val()]);
-                    return;
-                } 
-
-                let cartArray = cart.split(' ');
-                cartArray.push($('#ProductId').val());
-
-                localStorage.setItem('cart', cartArray);
-            }
-        });
-    </script>
+    <script src="~/js/shop-item.js"></script>
 }
 
 <input type="hidden" id="Id" value="@Model.Id" />

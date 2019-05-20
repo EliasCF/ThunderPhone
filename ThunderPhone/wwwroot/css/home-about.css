@@ -5,9 +5,8 @@
     font-size: 50px;
 }
 
-span {
+.description {
     color: lightgray;
-
     font-weight: bold;
     font-size: 25px;
 }
