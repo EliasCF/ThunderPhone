@@ -1,7 +1,39 @@
-﻿
+﻿@model ThunderPhone.Models.ProductsModel
+
 @{
     ViewData["Title"] = "Item";
 }
 
-<h2>Item</h2>
+@section Styles {
+    <link rel="stylesheet" href="~/css/shop-item.css" />
+}
 
+@section Scripts {
+    <script>
+        //Fetch the images of the product
+        $.get('/api/images/' + $('#productId').val(), (response) => {
+            $('#productImage').attr('src', response[0].imagePath)
+        });
+    </script>
+}
+
+<!--Contains the id of the product-->
+<input type="hidden" id="productId" value="@Model.Id" />
+
+<div class="container-fluid text-center">
+    <div class="row">
+        <div class="col-lg-6">
+            <img id="productImage" alt="product" width="500" height="500" />
+        </div>
+        <div class="col-lg-6">
+            <div class="text-left">
+                <h1 style="word-break:break-word">@Model.Name</h1>
+                <h3 class="price-tag mb-4">@Model.Price Kr,-</h3>
+                <article class="item-description mb-5">
+                    @Model.Description
+                </article>
+                <button class="form-control">Tilføj til kurv</button>
+            </div>
+        </div>
+    </div>
+</div>

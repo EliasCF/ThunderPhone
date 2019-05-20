@@ -23,7 +23,7 @@
 }
 
 .shop-item > div > a > img {
-    transition: transform 0.8s ease;
+    transition: transform 1.7s ease;
 }
 
 .shop-item > div > a > img:hover {
