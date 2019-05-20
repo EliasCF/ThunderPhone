@@ -72,7 +72,13 @@
             let cart = localStorage.getItem('cart');
 
             if (cart !== null) {
-                $('#CartItems').html(cart.split(',').length);
+                let cartItemAmount = 0;
+
+                JSON.parse(cart).forEach((item) => {
+                    cartItemAmount += item.amount;
+                });                
+
+                $('#CartItems').html(cartItemAmount);
             } else {
                 $('#CartItems').html(0);
             }
