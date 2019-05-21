@@ -1,5 +1,5 @@
 ﻿var CartApp = new Vue({
-    el: 'CartApp',
+    el: '#CartApp',
     data: {
         items: []
     },
@@ -11,8 +11,39 @@
             return;
         }
 
-        cart.split(',').forEach((item) => {
-            console.log(item);
+        JSON.parse(cart).forEach((item) => {
+            $.get('/api/products/' + item.product, (response) => {
+                let setItems = async () => {
+                    return {
+                        brand: await new Promise((resolve) => {
+                            $.get('/api/brands/' + response.brandId, (result) => {
+                                resolve(result);
+                            });
+                        }),
+                        color: await new Promise((resolve) => {
+                            $.get('/api/colors/' + response.colorId, (result) => {
+                                resolve(result);
+                            });
+                        }),
+                        category: await new Promise((resolve) => {
+                            $.get('/api/categories/' + response.categoryId, (result) => {
+                                resolve(result);
+                            });
+                        })
+                    };
+                };
+
+                setItems().then((result) => {
+                    resultObject = response;
+
+                    //Replace the empty property values with the newly fetched objects
+                    resultObject.brand = result.brand;
+                    resultObject.color = result.color;
+                    resultObject.category = result.category;
+
+                    this.items.push(resultObject);
+                });
+            });
         });
     }
 });

@@ -21,5 +21,8 @@ namespace ThunderPhone.Controllers.API
 
         [HttpGet]
         public List<BrandsModel> GetBrands() => db.Brands.ToList();
+
+        [HttpGet("{Id}")]
+        public BrandsModel GetBrand(int Id) => db.Brands.Single(b => b.Id == Id);
     }
 }

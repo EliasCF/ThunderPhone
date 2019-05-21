@@ -22,6 +22,9 @@ namespace ThunderPhone.Controllers.API
         [HttpGet]
         public List<CategoriesModel> GetCategories () => db.Categories.ToList();
 
+        [HttpGet("{Id}")]
+        public CategoriesModel Getcategory(int Id) => db.Categories.Single(c => c.Id == Id);
+
         [HttpGet("id/{name}")]
         public int GetIdByName(string name) => 
             db.Categories

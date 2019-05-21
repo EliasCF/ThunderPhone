@@ -1,6 +1,6 @@
 ﻿//Fetch the images of the product
 $.get('/api/images/' + $('#Id').val(), (response) => {
-    $('#productImage').attr('src', response[0].imagePath)
+    $('#productImage').attr('src', response[0].imagePath);
 });
 
 $('#AddToCart').on('click', () => {

@@ -34,9 +34,13 @@ namespace ThunderPhone.Controllers.API
             return query.ToList();
         }
 
-        [HttpGet("{prudctId}")]
-        public ProductsModel GetProduct (string ProductId) => 
-            db.Products
+        [HttpGet("{productId}")]
+        public ProductsModel GetProduct (string ProductId)
+        {
+            if (ProductId == null) return null;
+
+            return db.Products
                 .Single(p => p.ProductId == Guid.Parse(ProductId));
+        }
     }
 }

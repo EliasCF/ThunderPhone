@@ -18,5 +18,8 @@ namespace ThunderPhone.Controllers.API
 
         [HttpGet]
         public List<ColorsModel> GetBrands() => db.Colors.ToList();
+
+        [HttpGet("{Id}")]
+        public ColorsModel GetColor(int Id) => db.Colors.Single(c => c.Id == Id); 
     }
 }

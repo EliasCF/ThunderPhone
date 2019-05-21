@@ -1,8 +1,26 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Cart";
 }
 
-<div id="CartApp">
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="~/js/shop-cart.js"></script>
+}
 
+<div class="container-fluid text-center" id="CartApp">
+    <div class="card mb-5 ml-3 mr-3" v-for="item in items">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <div class="text-left">
+                        <h3 class="card-title">{{item.name}}</h3>
+                        <h5 class="card-subtitle text-muted">{{item.price}} kr,-</h5>
+                    </div>
+                </div>
+                <div class="col">
+                    <h6 class="card-text text-muted"></h6>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
