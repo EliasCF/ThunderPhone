@@ -1,7 +1,8 @@
 ﻿var CartApp = new Vue({
     el: '#CartApp',
     data: {
-        items: []
+        items: [],
+        itemAmounts: []
     },
     created: function () {
         let cart = localStorage.getItem('cart');
@@ -29,6 +30,11 @@
                             $.get('/api/categories/' + response.categoryId, (result) => {
                                 resolve(result);
                             });
+                        }),
+                        image: await new Promise((resolve) => {
+                            $.get('/api/images/' + response.id, (result) => {
+                                resolve(result[0].imagePath);
+                            });
                         })
                     };
                 };
@@ -40,10 +46,40 @@
                     resultObject.brand = result.brand;
                     resultObject.color = result.color;
                     resultObject.category = result.category;
+                    resultObject.imagePath = result.image;
+                    resultObject.amount = item.amount;
+
+                    this.itemAmounts.push(item.amount);
 
                     this.items.push(resultObject);
                 });
             });
         });
+    },
+    methods: {
+        editItemAmount: function (productId, newAmount) {
+            let cart = JSON.parse(localStorage.getItem('cart'));
+
+            //Find correct item and update amount property
+            cart.forEach((item, index) => {
+                if (item.product === productId) {
+                    cart[index].amount = parseInt(newAmount);
+                }
+            });
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+        },
+        removeItem: function (productId) {
+            let cart = JSON.parse(localStorage.getItem('cart'));
+
+            localStorage.setItem('cart',
+                JSON.stringify(
+                    cart.filter(item =>
+                        item.product !== productId)
+                )
+            );
+
+            this.items = this.items.filter(item => item.productId !== productId);
+        }
     }
 });

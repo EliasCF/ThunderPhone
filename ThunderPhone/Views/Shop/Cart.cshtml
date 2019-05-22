@@ -7,18 +7,44 @@
     <script src="~/js/shop-cart.js"></script>
 }
 
+@section Styles {
+    <link rel="stylesheet" href="~/css/shop-cart.css" />
+}
+
 <div class="container-fluid text-center" id="CartApp">
-    <div class="card mb-5 ml-3 mr-3" v-for="item in items">
+    <div class="card mb-5" v-for="(item, index) in items" :key="item.id">
         <div class="card-body">
             <div class="row">
-                <div class="col">
+                <div class="col mb-3">
                     <div class="text-left">
-                        <h3 class="card-title">{{item.name}}</h3>
-                        <h5 class="card-subtitle text-muted">{{item.price}} kr,-</h5>
+                        <a v-on:click="removeItem(item.productId)">X</a>
+                    </div>
+                        <p>Antal:</p>
+                        <input type="number" v-model="itemAmounts[index]" v-on:change="editItemAmount(item.productId, itemAmounts[index])" />
+                </div>
+                <div class="col mb-3">
+                    <img :src="item.imagePath" alt="ProductImage" width="200" height="200" />
+                </div>
+                <div class="col mb-3">
+                    <div class="row h-100">
+                        <div class="col-sm-12 my-auto">
+                            <div class="card card-block" style="border: none;">
+                                <h3>{{item.name}}</h3>
+                                <h5 class="text-muted">{{item.price}} kr,-</h5>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col">
-                    <h6 class="card-text text-muted"></h6>
+                <div class="col mb-3">
+                    <div class="row h-100">
+                        <div class="col-sm-12 my-auto">
+                            <div class="card card-block" style="border: none;">
+                                <h5 class="grey-text"><strong>Brand: </strong>{{item.brand.brand}}</h5>
+                                <h5 class=" grey-text"><strong>Kategori: </strong>{{item.category.category}}</h5>
+                                <h6 class="grey-text"><strong>Farve: </strong>{{item.color.color}}</h6>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
