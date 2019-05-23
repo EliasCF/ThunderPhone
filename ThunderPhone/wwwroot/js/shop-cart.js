@@ -14,45 +14,8 @@
 
         JSON.parse(cart).forEach((item) => {
             $.get('/api/products/' + item.product, (response) => {
-                let setItems = async () => {
-                    return {
-                        brand: await new Promise((resolve) => {
-                            $.get('/api/brands/' + response.brandId, (result) => {
-                                resolve(result);
-                            });
-                        }),
-                        color: await new Promise((resolve) => {
-                            $.get('/api/colors/' + response.colorId, (result) => {
-                                resolve(result);
-                            });
-                        }),
-                        category: await new Promise((resolve) => {
-                            $.get('/api/categories/' + response.categoryId, (result) => {
-                                resolve(result);
-                            });
-                        }),
-                        image: await new Promise((resolve) => {
-                            $.get('/api/images/' + response.id, (result) => {
-                                resolve(result[0].imagePath);
-                            });
-                        })
-                    };
-                };
-
-                setItems().then((result) => {
-                    resultObject = response;
-
-                    //Replace the empty property values with the newly fetched objects
-                    resultObject.brand = result.brand;
-                    resultObject.color = result.color;
-                    resultObject.category = result.category;
-                    resultObject.imagePath = result.image;
-                    resultObject.amount = item.amount;
-
-                    this.itemAmounts.push(item.amount);
-
-                    this.items.push(resultObject);
-                });
+                this.items.push(response);
+                this.itemAmounts.push(item.amount);
             });
         });
     },

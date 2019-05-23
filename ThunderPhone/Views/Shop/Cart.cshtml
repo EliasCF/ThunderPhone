@@ -23,7 +23,7 @@
                         <input type="number" v-model="itemAmounts[index]" v-on:change="editItemAmount(item.productId, itemAmounts[index])" />
                 </div>
                 <div class="col mb-3">
-                    <img :src="item.imagePath" alt="ProductImage" width="200" height="200" />
+                    <img :src="item.images[0].imagePath" alt="ProductImage" width="200" height="200" />
                 </div>
                 <div class="col mb-3">
                     <div class="row h-100">

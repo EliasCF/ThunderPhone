@@ -75,27 +75,6 @@ namespace ThunderPhone.Controllers.API
             return ConvertToApiModel(model);
         }
 
-        [HttpGet("from/{from}/amount/{amount}")]
-        public List<ApiProductsModel> GetProductRange (int from, int amount)
-        {
-            var model = Db.Products
-                .Skip(from)
-                .Take(amount)
-                .Include(p => p.Color)
-                .Include(p => p.Brand)
-                .Include(p => p.Category)
-                .ToList();
-
-            List<ApiProductsModel> result = new List<ApiProductsModel>();
-
-            model.ForEach(product =>
-            {
-                result.Add(ConvertToApiModel(product));
-            });
-
-            return result;
-        }
-
         //Convert from ProductsModel to ApiProductsModel
         public ApiProductsModel ConvertToApiModel(ProductsModel model)
         {
