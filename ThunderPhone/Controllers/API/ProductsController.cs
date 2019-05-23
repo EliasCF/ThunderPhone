@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ThunderPhone.Models;
+using ThunderPhone.Models.API;
 
 namespace ThunderPhone.Controllers.API
 {
@@ -10,17 +12,29 @@ namespace ThunderPhone.Controllers.API
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        public DatabaseContext db { get; set; }
+        public DatabaseContext Db { get; set; }
 
         public ProductsController (DatabaseContext context)
         {
-            db = context;
+            Db = context;
         }
 
         [HttpGet]
-        public List<ProductsModel> GetProducts (string categories, string brands, string colors)
+        public List<ApiProductsModel> GetProducts (
+            int? amount, 
+            string categories, 
+            string brands, 
+            string colors, 
+            int? from)
         {
-            var query = db.Products.AsQueryable();
+            var query = Db.Products
+                .Include(p => p.Color)
+                .Include(p => p.Brand)
+                .Include(p => p.Category)
+                .OrderByDescending(p => p.Id)
+                .AsQueryable();
+
+            var bla = query.ToList();
 
             if (categories != null)
                 query = query.Where(p => p.CategoryId == int.Parse(categories));
@@ -31,16 +45,73 @@ namespace ThunderPhone.Controllers.API
             if (colors != null)
                 query = query.Where(p => p.ColorId == int.Parse(colors));
 
-            return query.ToList();
+            if (from != null && amount != null)
+                query = query.Skip(from.GetValueOrDefault());
+
+            if (amount != null)
+                query = query.Take(amount.GetValueOrDefault());
+
+            List<ApiProductsModel> result = new List<ApiProductsModel>();
+
+            query.ToList().ForEach(product => 
+            {
+                result.Add(ConvertToApiModel(product));
+            });
+
+            return result;
         }
 
         [HttpGet("{productId}")]
-        public ProductsModel GetProduct (string ProductId)
+        public ApiProductsModel GetProduct (string ProductId)
         {
             if (ProductId == null) return null;
 
-            return db.Products
+            var model = Db.Products
+                .Include(p => p.Color)
+                .Include(p => p.Brand)
+                .Include(p => p.Category)
                 .Single(p => p.ProductId == Guid.Parse(ProductId));
+
+            return ConvertToApiModel(model);
         }
+
+        [HttpGet("from/{from}/amount/{amount}")]
+        public List<ApiProductsModel> GetProductRange (int from, int amount)
+        {
+            var model = Db.Products
+                .Skip(from)
+                .Take(amount)
+                .Include(p => p.Color)
+                .Include(p => p.Brand)
+                .Include(p => p.Category)
+                .ToList();
+
+            List<ApiProductsModel> result = new List<ApiProductsModel>();
+
+            model.ForEach(product =>
+            {
+                result.Add(ConvertToApiModel(product));
+            });
+
+            return result;
+        }
+
+        //Convert from ProductsModel to ApiProductsModel
+        public ApiProductsModel ConvertToApiModel(ProductsModel model)
+        {
+            return new ApiProductsModel
+            {
+                Id = model.Id,
+                ProductId = model.ProductId,
+                Name = model.Name,
+                Price = model.Price,
+                Color = model.Color,
+                Brand = model.Brand,
+                Category = model.Category,
+                Description = model.Description,
+                AdditionDate = model.AdditionDate,
+                Images = Db.Images.Where(i => i.ProductId == model.Id).ToList()
+            };
+        } 
     }
 }

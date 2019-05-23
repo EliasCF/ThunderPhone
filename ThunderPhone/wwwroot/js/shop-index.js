@@ -9,15 +9,17 @@
             category: 'Alle',
             color: 'Alle',
             brand: 'Alle'
-        }
+        },
+        currentProductAmount: 5,
+        productsPerLoad: 5
     },
     created: function () {
         var getProducts = (productId) => {
             return new Promise((resolve) => {
-                let queryString = '?categories=' + productId;
+                let queryString = '?categories=' + productId + '&amount=' + this.currentProductAmount;
 
                 if (productId === null) {
-                    queryString = '';
+                    queryString = '?amount=' + this.currentProductAmount;
                 }
 
                 //Get products and arrange them in arrays containing three products each
@@ -78,20 +80,6 @@
 
             return sliceList;
         },
-        getImagePath: function (id) {
-            result = null;
-
-            $.ajax({
-                url: '/api/images/' + id,
-                type: 'get',
-                async: false,
-                success: function (image) {
-                    result = image[0].imagePath;
-                }
-            });
-
-            return result;
-        },
         getProductsQueryString: function () {
             let queryString = '';
 
@@ -115,7 +103,25 @@
                 }
             }
 
+            if (queryString === '') {
+                queryString = '?amount=' + this.productsPerLoad;
+            } else {
+                queryString += '&amount=' + this.productsPerLoad;
+            }
+
             return queryString;
+        },
+        loadProductRange: function () {
+        /*`/api/products/from/${this.currentProductAmount}/amount/${this.productsPerLoad}`*/
+            console.log('/api/products' + this.getProductsQueryString() + '&from=' + this.currentProductAmount);
+
+            $.get('/api/products' + this.getProductsQueryString() + '&from=' + this.currentProductAmount, (response) => {
+                this.currentProductAmount += this.productsPerLoad;
+
+                this.sliceProducts(response).forEach((array) => {
+                    this.products.push(array);
+                });
+            });
         }
     },
     watch: {
@@ -130,7 +136,7 @@
             });
         },
         'selected.color': function () {
-            $.get('/api/products' + this.getProductsQueryString(), (response) => {
+            $.get('/api/products' + this.getProductsQueryString() + '&amount=' + this.productsPerLoad, (response) => {
                 this.products = this.sliceProducts(response);
             });
         }

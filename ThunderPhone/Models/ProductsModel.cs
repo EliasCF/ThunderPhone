@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System;
+using ThunderPhone.Models.API;
+using System.Linq;
 
 namespace ThunderPhone.Models
 {

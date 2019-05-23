@@ -50,7 +50,7 @@
             <div class="shop-item">
                 <div class="img-container">
                     <a :href="'/shop/item/' + product.productId">
-                        <img :src="getImagePath(product.id)" class="img-fluid" alt="product" width="500" height="500" />
+                        <img :src="product.images[0].imagePath" class="img-fluid" alt="product" width="500" height="500" />
                     </a>
                 </div>
                 <hr />
@@ -61,4 +61,5 @@
             </div>
         </div>
     </div>
+    <input type="button" v-on:click="loadProductRange" value="Indlæs flere" />
 </div>
