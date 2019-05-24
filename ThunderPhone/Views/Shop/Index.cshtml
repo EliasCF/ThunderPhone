@@ -61,5 +61,10 @@
             </div>
         </div>
     </div>
-    <input type="button" class="load-button" v-on:click="loadProductRange" value="Indlæs flere" />
+    <div v-if="loadingProducts">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <input type="button" v-if="showLoadMore" class="load-button" v-on:click="loadProductRange" value="Indlæs flere" />
 </div>

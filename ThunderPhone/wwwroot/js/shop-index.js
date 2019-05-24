@@ -10,10 +10,14 @@
             color: 'Alle',
             brand: 'Alle'
         },
+        loadingProducts: false,
+        showLoadMore: true,
         currentProductAmount: 5,
         productsPerLoad: 5
     },
     created: function () {
+        this.loadingProducts = true;
+
         var getProducts = (productId) => {
             return new Promise((resolve) => {
                 let queryString = '?categories=' + productId + '&amount=' + this.currentProductAmount;
@@ -48,6 +52,8 @@
 
         getProductId.then((value) => {
             getProducts(value).then((id) => {
+                this.loadingProducts = false;
+
                 //Get categories
                 $.get('/api/categories', (response) => {
                     this.categories = response;
@@ -80,7 +86,7 @@
 
             return sliceList;
         },
-        getProductsQueryString: function () {
+        getProductsQueryString: function (withAmount) {
             let queryString = '';
 
             if (this.selected.category !== 'Alle') {
@@ -103,16 +109,20 @@
                 }
             }
 
-            if (queryString === '') {
-                queryString = '?amount=' + this.productsPerLoad;
-            } else {
-                queryString += '&amount=' + this.productsPerLoad;
+            if (withAmount) {
+                if (queryString === '') {
+                    queryString = '?amount=' + this.productsPerLoad;
+                } else {
+                    queryString += '&amount=' + this.productsPerLoad;
+                }
             }
 
             return queryString;
         },
         loadProductRange: function () {
-            $.get('/api/products' + this.getProductsQueryString() + '&from=' + this.currentProductAmount, (response) => {
+            this.loadingProducts = true;
+
+            $.get('/api/products' + this.getProductsQueryString(true) + '&from=' + this.currentProductAmount, (response) => {
                 this.currentProductAmount += this.productsPerLoad;
 
                 let newItems = response;
@@ -134,23 +144,48 @@
                 this.sliceProducts(newItems).forEach((array) => {
                     this.products.push(array);
                 });
+
+                this.loadingProducts = false;
+            });
+
+            //Hide the 'Show more' button, if the max amount of products there are, 
+            //with the current filter settings is equal to the amount of loaded products
+            $.get('/api/products' + this.getProductsQueryString(false), (response) => {
+                let currentLength = 0;
+
+                this.products.forEach((array) => {
+                    currentLength += array.length;
+                });
+
+                if (currentLength === response.length) {
+                    this.showLoadMore = false;
+                }
             });
         }
     },
     watch: {
         'selected.category': function () {
-            $.get('/api/products' + this.getProductsQueryString(), (response) => {
+            $.get('/api/products' + this.getProductsQueryString(true), (response) => {
                 this.products = this.sliceProducts(response);
+
+                this.showLoadMore = true;
+                this.currentProductAmount = this.productsPerLoad;
             });
         },
         'selected.brand': function () {
-            $.get('/api/products' + this.getProductsQueryString(), (response) => {
+            $.get('/api/products' + this.getProductsQueryString(true), (response) => {
                 this.products = this.sliceProducts(response);
+
+                this.showLoadMore = true;
+                this.currentProductAmount = this.productsPerLoad;
             });
         },
         'selected.color': function () {
-            $.get('/api/products' + this.getProductsQueryString() + '&amount=' + this.productsPerLoad, (response) => {
+            $.get('/api/products' + this.getProductsQueryString(true) + '&amount=' + this.productsPerLoad, (response) => {
                 this.products = this.sliceProducts(response);
+
+                this.showLoadMore = true;
+                this.currentProductAmount = this.productsPerLoad;
             });
         }
     }

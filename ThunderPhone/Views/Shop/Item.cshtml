@@ -24,6 +24,13 @@
             <div class="text-left">
                 <h1 style="word-break:break-word">@Model.Name</h1>
                 <h3 class="price-tag mb-4">@Model.Price Kr,-</h3>
+                <hr />
+                <div style="font-size: small; font-weight: 600; color: #aeaeae; line-height: 5px;">
+                    <p>@Model.Category.Category</p>
+                    <p>Brand: @Model.Brand.Brand</p>
+                    <p>Farve: @Model.Color.Color</p>
+                </div>
+                <hr />
                 <article class="item-description mb-5">
                     @Model.Description
                 </article>

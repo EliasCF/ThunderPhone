@@ -12,15 +12,18 @@
 }
 
 <div class="container-fluid text-center" id="CartApp">
-    <div class="card mb-5" v-for="(item, index) in items" :key="item.id">
+    <div v-if="items.length === 0">
+        <h1>Indkøbskurven er tom!</h1>
+    </div>
+    <div v-else class="card mb-5" v-for="(item, index) in items" :key="item.id">
         <div class="card-body product-card">
             <div class="row">
                 <div class="col mb-3">
                     <div class="text-left">
-                        <a v-on:click="removeItem(item.productId)">X</a>
+                        <a v-on:click="removeItem(item.productId)" style="cursor: pointer;">X</a>
                     </div>
-                        <p>Antal:</p>
-                        <input type="number" v-model="itemAmounts[index]" v-on:change="editItemAmount(item.productId, itemAmounts[index])" />
+                    <p>Antal:</p>
+                    <input type="number" v-model="itemAmounts[index]" v-on:change="editItemAmount(item.productId, itemAmounts[index])" />
                 </div>
                 <div class="col mb-3">
                     <img :src="item.images[0].imagePath" alt="ProductImage" width="200" height="200" />
