@@ -112,13 +112,26 @@
             return queryString;
         },
         loadProductRange: function () {
-        /*`/api/products/from/${this.currentProductAmount}/amount/${this.productsPerLoad}`*/
-            console.log('/api/products' + this.getProductsQueryString() + '&from=' + this.currentProductAmount);
-
             $.get('/api/products' + this.getProductsQueryString() + '&from=' + this.currentProductAmount, (response) => {
                 this.currentProductAmount += this.productsPerLoad;
 
-                this.sliceProducts(response).forEach((array) => {
+                let newItems = response;
+
+                //Length of the last array in items
+                let lastItemArrayLength = this.products[this.products.length - 1].length;
+
+                //If the last array of this.products is less than 3 items long
+                //Then we have to move the top items from the new array to keep this.products consistent
+                if (lastItemArrayLength !== 3) {
+                    newItems.slice(0, 3 - lastItemArrayLength).forEach((item) => {
+                        this.products[this.products.length - 1].push(item);
+                    });
+
+                    //Remove the moved items to avoid adding them to this.products twice
+                    newItems = newItems.slice(3 - lastItemArrayLength, newItems.length);
+                }
+
+                this.sliceProducts(newItems).forEach((array) => {
                     this.products.push(array);
                 });
             });
